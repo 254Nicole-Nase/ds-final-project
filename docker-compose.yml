@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  balancer:
+    build: ./balancer
+    container_name: balancer
+    ports:
+      - "5000:5000"
+    networks:
+      - net1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  net1:
+    name: net1      # <-- this keeps the name consistent (important!)
+    driver: bridge
+
