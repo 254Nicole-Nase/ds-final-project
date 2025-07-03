@@ -10,9 +10,17 @@ services:
       - net1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
+  server:
+    build: ./server
+    image: myserver:latest
+    networks:
+      - net1
+    expose:
+      - "5000"
 
 networks:
   net1:
-    name: net1      # <-- this keeps the name consistent (important!)
+    name: net1
     driver: bridge
 

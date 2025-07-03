@@ -129,7 +129,8 @@ def forward_root():
         return jsonify({"message": "No servers available", "status": "failure"}), 500
 
     print(f"[>] Forwarding / to {target}")
-    return jsonify(*try_request(target, "/"))
+    resp, code = try_request(target, "/")
+    return jsonify(resp), code
 
 @app.route("/home", methods=["GET"])
 def forward_home():
@@ -140,8 +141,18 @@ def forward_home():
         return jsonify({"message": "No servers available", "status": "failure"}), 500
 
     print(f"[>] Forwarding /home to {target}")
-    return jsonify(*try_request(target, "/home"))
+    resp, code = try_request(target, "/home")
+    return jsonify(resp), code
+
+@app.route("/<path:path>", methods=["GET"])
+def unknown_route(path):
+    return jsonify({
+        "message": f"<Error> '/{path}' endpoint does not exist in server replicas",
+        "status": "failure"
+    }), 404
 
 if __name__ == "__main__":
+    for _ in range(3):  # Default N = 3
+        add_server()
     app.run(host="0.0.0.0", port=5000)
 
