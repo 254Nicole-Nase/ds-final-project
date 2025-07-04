@@ -156,7 +156,7 @@ docker logs balancer
 **Results:**  
 ![A-1 Bar Chart](analysis/A-1:_Request_Distribution_(N=3).png)
 - **Terminal output:**  
-  ![A-1 Terminal]([analysis/A-1_terminal-screenshot.png](https://github.com/254Nicole-Nase/ds-final-project/blob/main/analysis/A-1%20terminal-screenshot.png))
+  ![A-1 Terminal](analysis/A-1%20terminal-screenshot.png)
 - **Observation:**  
   Requests were unnevenly distributed. 
 - Consistent hashing achieved its goal of balanced load.
@@ -180,7 +180,7 @@ docker logs balancer
 - Stopped a server manually (`docker stop S1`).
 - Sent requests to `/home` and observed balancer logs and server list.
 - **Terminal output:**                                                                 - **docker ps after recovery:**  
-  ![A-3 Terminal]([analysis/A-3_terminal.png](https://github.com/254Nicole-Nase/ds-final-project/blob/main/analysis/A-3%20Screenshot%201.png))                              ![A-3 Docker PS]([analysis/A-3_docker_ps.png](https://github.com/254Nicole-Nase/ds-final-project/blob/main/analysis/A-3%20docker-ps.png))
+  ![A-3 Terminal](analysis/A-3%20Screenshot%201.png)                                   ![A-3 Docker PS](analysis/A-3%20docker-ps.png)
 - **Observation:**  
   Balancer detected failure and replaced the server. Load was re-distributed.
 
