@@ -170,7 +170,7 @@ docker logs balancer
 
 **Results:**  
 - **Line chart:**                                                                  |    - **Terminal output:**  
-  ![A-2 Chart](analysis/A-2:_Average_Load_vs._Number_of_Servers.png)               |      ![A-2 Terminal](analysis/A-2 N=2.png)
+  ![A-2 Chart](analysis/A-2:_Average_Load_vs._Number_of_Servers.png)               |      ![A-2 Terminal](analysis/A-2%20N%3D2.png)
 - **Observation:**  
   As N increased, average load per server decreased. 
 ---
