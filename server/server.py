@@ -3,12 +3,16 @@ import os
 
 app = Flask(__name__)
 SERVER_ID = os.getenv("SERVER_ID", "unknown")
+REQUEST_COUNT = 0  # Add this line
 
 @app.route("/home", methods=["GET"])
 def home():
+    global REQUEST_COUNT  # Declare as global
+    REQUEST_COUNT += 1    # Increment the counter
     return jsonify({
         "message": f"Hello from Server: {SERVER_ID}",
-        "status": "successful"
+        "status": "successful",
+        "request_count": REQUEST_COUNT  # Add this to the response
     }), 200
 
 @app.route("/heartbeat", methods=["GET"])
