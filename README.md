@@ -66,6 +66,58 @@ ds-final-project/
 3. Build and run docker image
 4. Test endpoints
 
+## Task 3 - Load Balancer Functionality & Fault Tolerance
+# Goal
+
+Deploy a consistent-hashing-based load balancer that:
+1. Dynamically spins up and tracks server replicas
+2. Routes traffic based on consistent hashing
+3. Detects and removes failed replicas
+### Steps
+
+#### Start the system:
+```bash
+make up
+
+Add replicas:
+
+curl -X POST http://localhost:5000/add -H "Content-Type: application/json" -d '{"n": 3}'
+
+Expected response:
+
+{"message":{"N":3,"replicas":["S1","S2","S3"]},"status":"successful"}
+
+Send requests to /home:
+
+curl http://localhost:5000/home
+
+Expected output rotates between:
+
+{"message":"Hello from Server: 1","status":"successful"}
+
+Simulate a server failure:
+
+docker stop S2
+
+Then:
+
+curl http://localhost:5000/home
+
+Expected failure handling:
+
+[{"message":"Server S2 was down and removed","status":"failure"},500]
+
+Add or remove servers dynamically:
+
+curl -X POST http://localhost:5000/add -H "Content-Type: application/json" -d '{"n": 1}'
+curl -X DELETE http://localhost:5000/rm -H "Content-Type: application/json" -d '{"n": 1, "hostnames":["S3"]}'
+
+Verify system state:
+
+curl http://localhost:5000/rep
+docker ps
+docker logs balancer
+
 ## Task 4: Analysis and Observations
 
 ### System Architecture
