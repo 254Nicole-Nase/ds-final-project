@@ -78,46 +78,46 @@ Deploy a consistent-hashing-based load balancer that:
 #### Start the system:
 ```bash
 make up
-
+```
 Add replicas:
-
+```bash
 curl -X POST http://localhost:5000/add -H "Content-Type: application/json" -d '{"n": 3}'
-
+```
 Expected response:
-
+```bash
 {"message":{"N":3,"replicas":["S1","S2","S3"]},"status":"successful"}
-
+```
 Send requests to /home:
-
+```bash
 curl http://localhost:5000/home
-
+```
 Expected output rotates between:
-
+```bash
 {"message":"Hello from Server: 1","status":"successful"}
-
+```
 Simulate a server failure:
-
+```bash
 docker stop S2
-
+```
 Then:
-
+```bash
 curl http://localhost:5000/home
-
+```
 Expected failure handling:
-
+```bash
 [{"message":"Server S2 was down and removed","status":"failure"},500]
-
+```
 Add or remove servers dynamically:
-
+```bash
 curl -X POST http://localhost:5000/add -H "Content-Type: application/json" -d '{"n": 1}'
 curl -X DELETE http://localhost:5000/rm -H "Content-Type: application/json" -d '{"n": 1, "hostnames":["S3"]}'
-
+```
 Verify system state:
-
+```bash
 curl http://localhost:5000/rep
 docker ps
 docker logs balancer
-
+```
 ## Task 4: Analysis and Observations
 
 ### System Architecture
