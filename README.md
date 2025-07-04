@@ -119,8 +119,8 @@ curl http://localhost:5000/rep
 docker ps
 docker logs balancer
 ```
-## Task 4: Analysis and Observations
 
+## Task 4: Analysis and Observations
 ### System Architecture
 - **Clients** send requests to the load balancer.
 - **Load Balancer** (Flask app in `balancer/`) uses consistent hashing to distribute requests to server replicas.
@@ -138,39 +138,21 @@ docker logs balancer
   - The balancer adds/removes servers via Docker.
   - Fault tolerance is **reactive**: a server is removed and replaced when a request to it fails.
 - **Deployment:** Docker Compose and Makefile are used for orchestration.
-
 ### Setup and Deployment
 - Prerequisites: Docker, Docker Compose, Python 3 (for analysis client).
 - Directory structure: see above.
 - Build and run: `make up`
 - Analysis: `cd analysis && python client.py`
-
-### Interacting with the System (API Examples)
-```bash
-curl http://localhost:5000/rep
-curl -X POST http://localhost:5000/add -H "Content-Type: application/json" -d '{"n": 2}'
-curl -X DELETE http://localhost:5000/rm -H "Content-Type: application/json" -d '{"n": 1}'
-curl http://localhost:5000/home
-curl http://localhost:5000/other
-```
-
-
-## Task 4: Analysis and Observations
-
 ### Methodology
-
 - Used `analysis/client.py` (Python, aiohttp) to send 10,000 asynchronous requests for each experiment.
 - Collected request counts per server from responses.
 - Generated charts using matplotlib, saved in `analysis/`.
-
 ---
 
 ### **A-1: Load Distribution (N=3)**
-
 **Procedure:**  
 - Ensured 3 servers running.
 - Sent 10,000 requests to `/home`.
-
 **Results:**  
 ![A-1 Bar Chart](analysis/A-1:_Request_Distribution_(N=3).png)
 - **Terminal output:**  
@@ -178,11 +160,9 @@ curl http://localhost:5000/other
 - **Observation:**  
   Requests were unnevenly distributed. 
 - Consistent hashing [did/did not] achieve its goal of balanced load.
-
 ---
 
 ### **A-2: Scalability (N=2 to N=6)**
-
 **Procedure:**  
 - Varied N from 2 to 6.
 - Sent 10,000 requests for each N.
@@ -195,11 +175,9 @@ curl http://localhost:5000/other
   ![A-2 Terminal](analysis/A-2_terminal.png)
 - **Observation:**  
   As N increased, average load per server decreased. 
-
 ---
 
 ### **A-3: Server Failure and Recovery**
-
 **Procedure:**  
 - Stopped a server manually (`docker stop S1`).
 - Sent requests to `/home` and observed balancer logs and server list.
@@ -213,11 +191,6 @@ curl http://localhost:5000/other
 ---
 
 ### A-4: Impact of Modified Hash Functions
-
-- **Charts with bad hash:**  
-  ![A-4 Chart](analysis/A-4_chart.png)
-- **Terminal output:**  
-  ![A-4 Terminal](analysis/A-4_terminal.png)
 - **Observation:**  
   With poor hash functions, distribution was worse. Good hash functions minimize collisions and balance load.
 
