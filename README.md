@@ -67,7 +67,8 @@ ds-final-project/
 4. Test endpoints
 
 ## Task 3 - Load Balancer Functionality & Fault Tolerance
-# Goal
+
+Goal
 
 Deploy a consistent-hashing-based load balancer that:
 1. Dynamically spins up and tracks server replicas
