@@ -156,10 +156,10 @@ docker logs balancer
 **Results:**  
 ![A-1 Bar Chart](analysis/A-1:_Request_Distribution_(N=3).png)
 - **Terminal output:**  
-  ![A-1 Terminal](analysis/A-1_terminal.png)
+  ![A-1 Terminal]([analysis/A-1_terminal-screenshot.png](https://github.com/254Nicole-Nase/ds-final-project/blob/main/analysis/A-1%20terminal-screenshot.png))
 - **Observation:**  
   Requests were unnevenly distributed. 
-- Consistent hashing [did/did not] achieve its goal of balanced load.
+- Consistent hashing achieved its goal of balanced load.
 ---
 
 ### **A-2: Scalability (N=2 to N=6)**
@@ -169,10 +169,8 @@ docker logs balancer
 - Calculated average load per server.
 
 **Results:**  
-- **Line chart:**  
-  ![A-2 Chart](analysis/A-2:_Average_Load_vs._Number_of_Servers.png)
-- **Terminal output:**  
-  ![A-2 Terminal](analysis/A-2_terminal.png)
+- **Line chart:**                                                                  |    - **Terminal output:**  
+  ![A-2 Chart](analysis/A-2:_Average_Load_vs._Number_of_Servers.png)               |      ![A-2 Terminal]((https://github.com/254Nicole-Nase/ds-final-project/blob/main/analysis/A-2%20N%3D2.png))
 - **Observation:**  
   As N increased, average load per server decreased. 
 ---
@@ -181,10 +179,8 @@ docker logs balancer
 **Procedure:**  
 - Stopped a server manually (`docker stop S1`).
 - Sent requests to `/home` and observed balancer logs and server list.
-- **Terminal output:**  
-  ![A-3 Terminal](analysis/A-3_terminal.png)
-- **docker ps after recovery:**  
-  ![A-3 Docker PS](analysis/A-3_docker_ps.png)
+- **Terminal output:**                                                                 - **docker ps after recovery:**  
+  ![A-3 Terminal]([analysis/A-3_terminal.png](https://github.com/254Nicole-Nase/ds-final-project/blob/main/analysis/A-3%20Screenshot%201.png))                              ![A-3 Docker PS]([analysis/A-3_docker_ps.png](https://github.com/254Nicole-Nase/ds-final-project/blob/main/analysis/A-3%20docker-ps.png))
 - **Observation:**  
   Balancer detected failure and replaced the server. Load was re-distributed.
 
